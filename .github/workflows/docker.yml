@@ -3,8 +3,6 @@ name: Docker test and publish
 on:
   repository_dispatch:
     branches:
-      - main
-      - 6.x
       - GHActions-Test
 
 jobs:
@@ -14,6 +12,7 @@ jobs:
       IS_LATEST: true
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      VERSION: ${{ github.event.client_payload.version }}
 
     runs-on: ubuntu-latest
 
@@ -27,6 +26,7 @@ jobs:
       - name: Build container
         working-directory: docker
         run: |
+          echo "$VERSION"
           docker system prune --all --force --volumes
           docker builder prune --force --keep-storage=10GB
           make lint build test
