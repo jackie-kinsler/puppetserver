@@ -1,7 +1,7 @@
 name: Docker test and publish
 
 on:
-  push:
+  repository_dispatch:
     branches:
       - main
 
