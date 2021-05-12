@@ -4,6 +4,8 @@ on:
   repository_dispatch:
     branches:
       - main
+      - 6.x
+      - GHActions-Test
 
 jobs:
   build-and-publish:
